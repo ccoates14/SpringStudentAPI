@@ -1,14 +1,19 @@
 package com.example.demo.student;
 
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class StudentService {
+
+    private StudentRepository repo ;
+
+    public StudentService(StudentRepository repo){
+        this.repo = repo;
+    }
+
     public List<Student> getStudents(){
-        return List.of(new Student("chan", LocalDate.now(), "email"));
+        return repo.findAll();
     }
 
 }
