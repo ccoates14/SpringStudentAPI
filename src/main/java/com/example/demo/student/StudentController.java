@@ -2,6 +2,7 @@ package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -15,14 +16,24 @@ public class StudentController {
         this.service = service;
     }
 
-    @GetMapping("/getStudents")
+    @GetMapping()
     public List<Student> getStudents(){
         return service.getStudents();
     }
 
-    @PostMapping("/createStudent")
-    public void createStudent(@RequestBody Student student){
+    @PostMapping()
+    public void createStudent(@RequestBody Student student) {
+        service.createStudent(student);
+    }
 
+    @PutMapping()
+    public void updateStudent(@RequestBody Student student){
+        service.updateStudent(student);
+    }
+
+    @DeleteMapping(path = "{id}")
+    public void deleteStudent(@PathVariable("id") Long id){
+        service.deleteStudent(id);
     }
 
 }
